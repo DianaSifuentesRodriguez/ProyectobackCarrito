@@ -28,6 +28,11 @@ Route::get('departamentos', 'DepartamentoController@ListarDepartamento');
 Route::get('marcas', 'MarcaController@ListarMarca');
 Route::get('productosbycategoria/{id_dep}', 'ProductoController@ListarProductos');
 Route::get('getdesProducto/{pro_nombre}/{dep_id}', 'ProductoController@GetDescripcionProducto');
+Route::get('ubi_dep', 'UbicacionController@ListarUbidep');
+Route::get('ubi_prov/{id}', 'UbicacionController@ListarUbiprov');
+Route::get('ubi_dist/{id}', 'UbicacionController@ListarUbidist');
 Route::resource('productos', 'ProductoController');
 Route::resource('indexdep', 'DepartamentoController');
 Route::resource('indexmar', 'MarcaController');
+
+
