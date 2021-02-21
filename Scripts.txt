@@ -1,0 +1,23 @@
+insert into departamento (dep_nombre) values('Ropa');
+insert into departamento (dep_nombre) values('Zapatos');
+insert into departamento (dep_nombre) values('Carteras');
+
+
+
+insert into marca (mar_nombre) values('Channel');
+insert into marca (mar_nombre) values('Adidas');
+insert into marca (mar_nombre) values('Gucci');
+insert into marca (mar_nombre) values('Nike');
+
+insert into producto (pro_nombre,pro_precio,pro_stock,mar_id,dep_id,pro_cantidad,pro_estado) 
+values('Polera','45.00',5,1,1,15,1);
+insert into producto (pro_nombre,pro_precio,pro_stock,mar_id,dep_id,pro_cantidad,pro_estado) 
+values('Jean','30.00',5,1,1,10,1);
+insert into producto (pro_nombre,pro_precio,pro_stock,mar_id,dep_id,pro_cantidad,pro_estado) 
+values('Zapatillas','100.00',5,4,2,12,1);
+insert into producto (pro_nombre,pro_precio,pro_stock,mar_id,dep_id,pro_cantidad,pro_estado) 
+values('Sandalias','20.00',5,2,2,25,1);
+insert into producto (pro_nombre,pro_precio,pro_stock,mar_id,dep_id,pro_cantidad,pro_estado) 
+values('Mochila','70.00',5,3,3,9,1);
+insert into producto (pro_nombre,pro_precio,pro_stock,mar_id,dep_id,pro_cantidad,pro_estado) 
+values('Bolso','45.00',5,3,3,17,1);

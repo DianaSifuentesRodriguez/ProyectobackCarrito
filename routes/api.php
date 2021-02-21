@@ -25,4 +25,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 });
 
 Route::get('departamentos', 'DepartamentoController@ListarDepartamento');
+Route::get('marcas', 'MarcaController@ListarMarca');
 Route::get('productos/{id_dep}', 'ProductoController@ListarProductos');
+Route::get('getdesProducto/{pro_nombre}/{dep_id}', 'ProductoController@GetDescripcionProducto');
+Route::resource('productos', 'ProductoController');
