@@ -29,3 +29,5 @@ Route::get('marcas', 'MarcaController@ListarMarca');
 Route::get('productosbycategoria/{id_dep}', 'ProductoController@ListarProductos');
 Route::get('getdesProducto/{pro_nombre}/{dep_id}', 'ProductoController@GetDescripcionProducto');
 Route::resource('productos', 'ProductoController');
+Route::resource('indexdep', 'DepartamentoController');
+Route::resource('indexmar', 'MarcaController');
