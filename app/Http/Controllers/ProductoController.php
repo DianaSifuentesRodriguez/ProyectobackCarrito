@@ -11,7 +11,8 @@ class ProductoController extends Controller
     public function index()
     {
        
-        $producto=DB::table('producto as p')->join('departamento as d','d.dep_id','=','p.dep_id')->join('marca as m','m.mar_id','=','p.mar_id')->where('p.pro_estado','=','1')->select('p.pro_id','p.pro_nombre','p.pro_precio','p.pro_stock','m.mar_id','d.dep_id','p.pro_cantidad')->get();
+        $producto=DB::table('producto as p')->join('departamento as d','d.dep_id','=','p.dep_id')->join('marca as m','m.mar_id','=','p.mar_id')->where('p.pro_estado','=','1')->select('p.pro_id','p.pro_nombre','p.pro_precio','p.pro_stock','m.mar_id','d.dep_id','p.pro_cantidad','d.dep_nombre'
+        ,'m.mar_nombre')->get();
         return response()->json($producto);
 
     }
