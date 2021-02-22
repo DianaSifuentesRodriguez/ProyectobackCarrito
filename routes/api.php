@@ -31,8 +31,11 @@ Route::get('getdesProducto/{pro_nombre}/{dep_id}', 'ProductoController@GetDescri
 Route::get('ubi_dep', 'UbicacionController@ListarUbidep');
 Route::get('ubi_prov/{id}', 'UbicacionController@ListarUbiprov');
 Route::get('ubi_dist/{id}', 'UbicacionController@ListarUbidist');
+Route::get('login/{usu_email}/{usu_password}', 'UsuarioController@UsuLogin');
+Route::get('verified/{usu_dni}', 'UsuarioController@verifySession');
 Route::resource('productos', 'ProductoController');
 Route::resource('indexdep', 'DepartamentoController');
 Route::resource('indexmar', 'MarcaController');
+Route::resource('usuario', 'UsuarioController');
 
 

@@ -1,15 +1,15 @@
 CREATE TABLE USUARIO(
-        USU_DNI               VARCHAR(11) NOT NULL ,
-	USU_EMAIL             VARCHAR(40) ,
-	USU_PASSWORD          VARCHAR(60) ,
-        USU_TOKEN             VARCHAR(60) ,
-	USU_ESTADO            CHAR(1) ,
-	USU_APELLIDOS         VARCHAR(40) ,
-	USU_NOMBRES           VARCHAR(40) ,
-	USU_TELEFONO          VARCHAR(40) ,
-	USU_CELULAR           VARCHAR(40) ,
-	USU_DIRECCION         VARCHAR(40) ,
-        USU_FECH_REG          DATE        ,
+	        USU_DNI               VARCHAR(11) NOT NULL ,
+		USU_APELLIDOS         VARCHAR(40) ,
+		USU_NOMBRES           VARCHAR(40) ,
+		USU_TELEFONO          VARCHAR(40) ,
+		USU_CELULAR           VARCHAR(40) ,
+		USU_DIRECCION         VARCHAR(40) ,
+		USU_EMAIL             VARCHAR(40) ,
+		USU_PASSWORD          VARCHAR(60) ,
+		USU_FECH_REG          DATE,
+		USU_ESTADO            CHAR(1), 
+       
      PRIMARY KEY(USU_DNI)
 );
 
@@ -27,22 +27,22 @@ CREATE TABLE TIPO_COMPROBANTE(
 );
 
 CREATE TABLE COMPRA(
-	COM_NUM               SERIAL NOT NULL ,
+		COM_NUM               SERIAL NOT NULL ,
         COM_FECHA             DATE ,
-	COM_TOTALNETO         FLOAT ,
-	COM_DESCUENTO         FLOAT ,
-	COM_TOTAL             FLOAT ,
-	USU_DNI               VARCHAR(11) ,
-	COM_COMERCIO          VARCHAR(40) ,
-	TI_ID                 INT ,
-	COM_ESTADO            VARCHAR(4) ,
-	COM_DOI               VARCHAR(11) ,
-	COM_TIPODOI           CHAR(3) ,
-	COM_ISDELIVERY        INT ,
-	COM_SERIE             VARCHAR(4) ,
-	COM_NCOM              VARCHAR(4) ,
-	COM_PERIODO           VARCHAR(6) ,
-	PA_ID                 INT,
+		COM_TOTALNETO         FLOAT ,
+		COM_DESCUENTO         FLOAT ,
+		COM_TOTAL             FLOAT ,
+		USU_DNI               VARCHAR(11) ,
+		COM_COMERCIO          VARCHAR(40) ,
+		TI_ID                 INT ,
+		COM_ESTADO            VARCHAR(4) ,
+		COM_DOI               VARCHAR(11) ,
+		COM_TIPODOI           CHAR(3) ,
+		COM_ISDELIVERY        INT ,
+		COM_SERIE             VARCHAR(4) ,
+		COM_NCOM              VARCHAR(4) ,
+		COM_PERIODO           VARCHAR(6) ,
+		PA_ID                 INT,
     PRIMARY KEY(COM_NUM),
     FOREIGN KEY(USU_DNI) REFERENCES USUARIO(USU_DNI),
     FOREIGN KEY(TI_ID) REFERENCES TIPO_COMPROBANTE(TI_ID),
@@ -51,38 +51,38 @@ CREATE TABLE COMPRA(
 
 CREATE TABLE DEPARTAMENTO(
         DEP_ID                SERIAL NOT NULL ,
-	DEP_NOMBRE            VARCHAR(40),
+		DEP_NOMBRE            VARCHAR(40),
         DEP_ESTADO            INT,
     PRIMARY KEY(DEP_ID)
 );
 
 CREATE TABLE MARCA(
         MAR_ID                SERIAL NOT NULL ,
-	MAR_NOMBRE            VARCHAR(40),
+		MAR_NOMBRE            VARCHAR(40),
         MAR_ESTADO            INT,
     PRIMARY KEY(MAR_ID)
 );
 
 CREATE TABLE PRODUCTO(
         PRO_ID                SERIAL NOT NULL ,
-	PRO_NOMBRE            TEXT ,
-	PRO_PRECIO            FLOAT ,
-	PRO_STOCK             INT ,
-	MAR_ID                INT ,
-	DEP_ID                INT ,
-	PRO_CANTIDAD          INT ,
-	PRO_ESTADO            INT,
+		PRO_NOMBRE            TEXT ,
+		PRO_PRECIO            FLOAT ,
+		PRO_STOCK             INT ,
+		MAR_ID                INT ,
+		DEP_ID                INT ,
+		PRO_CANTIDAD          INT ,
+		PRO_ESTADO            INT,
     PRIMARY KEY(PRO_ID),
     FOREIGN KEY(MAR_ID) REFERENCES MARCA(MAR_ID),
     FOREIGN KEY(DEP_ID) REFERENCES DEPARTAMENTO(DEP_ID)
 );
 
 CREATE TABLE DETALLE_COMPRA(
-	PRO_ID                INT NOT NULL ,
-	COM_NUM               INT NOT NULL ,
+		PRO_ID                INT NOT NULL ,
+		COM_NUM               INT NOT NULL ,
         DCO_PUNITARIO         FLOAT ,
-	DCO_CANTIDAD          INT ,
-	DCO_SUBTOTAL          FLOAT ,
+		DCO_CANTIDAD          INT ,
+		DCO_SUBTOTAL          FLOAT ,
     PRIMARY KEY(PRO_ID, COM_NUM),
     FOREIGN KEY(PRO_ID) REFERENCES PRODUCTO(PRO_ID),
     FOREIGN KEY(COM_NUM) REFERENCES COMPRA(COM_NUM)
@@ -113,14 +113,14 @@ CREATE TABLE UBIGEO_PERU_DISTRICTS(
 );
 
 CREATE TABLE DELIVERY(
-	COM_NUM               SERIAL NOT NULL ,
+		COM_NUM               SERIAL NOT NULL ,
         DEL_PRECIO            FLOAT ,
-	DEL_FENTREGA          DATE ,
-	DEL_ESTADO            INT ,
-	department_id         VARCHAR(2) ,
-	province_id           VARCHAR(4) ,
-	district_id           VARCHAR(6) ,
-	DEL_CALLE             TEXT,
+		DEL_FENTREGA          DATE ,
+		DEL_ESTADO            INT ,
+		department_id         VARCHAR(2) ,
+		province_id           VARCHAR(4) ,
+		district_id           VARCHAR(6) ,
+		DEL_CALLE             TEXT,
     PRIMARY KEY(COM_NUM),
     FOREIGN KEY(department_id) references UBIGEO_PERU_DEPARTMENTS(id),
     FOREIGN KEY(province_id) references UBIGEO_PERU_PROVINCES(id),
