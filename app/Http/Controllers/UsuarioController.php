@@ -16,7 +16,8 @@ class UsuarioController extends Controller
     }
     public function UsuLogin($log, $pass)
     {
-        $login = DB::table('usuario as u')-> where('u.usu_email','=',$log)->where('u.usu_password','=',$pass)->get();
+        $login = DB::table('usuario as u')-> where('u.usu_email','=',$log)->where('u.usu_password','=',$pass)
+        ->where('u.usu_estado','=','1')->get();
         return response()->json($login);
     }
     public function verifySession($id){
