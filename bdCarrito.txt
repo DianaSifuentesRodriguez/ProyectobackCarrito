@@ -1,199 +1,128 @@
-CREATE TABLE CARACTERISTICAS
-(
-
-	CAT_ID                SERIAL NOT NULL ,
-	CAT_NOMBRE            CHAR(18) 
-);
-CREATE UNIQUE INDEX XPKCARACTERISTICAS ON CARACTERISTICAS 
-(
-
-	CAT_ID
-);
-CREATE TABLE COMPRA
-(
-
-	COM_FECHA             DATE ,
-	COM_TOTALNETO         FLOAT ,
-	COM_DESCUENTO         FLOAT ,
-	COM_TOTAL             FLOAT ,
-	USU_DNI               VARCHAR(11) ,
-	COM_NUM               SERIAL NOT NULL ,
-	COM_COMERCIO          VARCHAR(40) ,
-	TI_ID                 INT ,
-	COM_ESTADO            INT ,
-	COM_DOI               VARCHAR(11) ,
-	COM_TIPODOI           CHAR(3) ,
-	COM_SERIE             INT ,
-	COM_NCOM              INT ,
-	COM_PERIODO			  VARCHAR(40),
-	COM_ISDELIVERY		  INT,
-	PA_ID                 INT 
-);
-CREATE UNIQUE INDEX XPKCOMPRA ON COMPRA 
-(
-
-	COM_NUM
-);
-CREATE TABLE CORRELATIVO
-(
-
-	COR_NUM               SERIAL NOT NULL ,
-	TI_ID                 SERIAL NOT NULL 
-);
-CREATE UNIQUE INDEX XPKCORRELATIVO ON CORRELATIVO 
-(
-
-	TI_ID
-);
-CREATE TABLE DELIVERY
-(
-
-	DEL_PRECIO            FLOAT ,
-	DEL_FENTREGA          DATE ,
-	DEL_ESTADO            INT ,
-	COM_NUM               SERIAL NOT NULL ,
-	department_id         VARCHAR(2) ,
-	province_id           VARCHAR(4) ,
-	district_id           VARCHAR(6) ,
-	DEL_CALLE             TEXT 
-);
-CREATE UNIQUE INDEX XPKDELIVERY ON DELIVERY 
-(
-
-	COM_NUM
-);
-CREATE TABLE DEPARTAMENTO
-(
-
-	DEP_ID                SERIAL NOT NULL ,
-	DEP_NOMBRE            VARCHAR(40) 
-);
-CREATE UNIQUE INDEX XPKDEPARTAMENTO ON DEPARTAMENTO 
-(
-
-	DEP_ID
-);
-CREATE TABLE DETALLE_COMPRA
-(
-
-	DCO_PUNITARIO         FLOAT ,
-	DCO_CANTIDAD          INT ,
-	DCO_SUBTOTAL          FLOAT ,
-	PRO_ID                SERIAL NOT NULL ,
-	COM_NUM               SERIAL NOT NULL 
-);
-CREATE UNIQUE INDEX XPKDETALLE_COMPRA ON DETALLE_COMPRA 
-(
-
-	PRO_ID,
-	COM_NUM
-);
-CREATE TABLE MARCA
-(
-
-	MAR_ID                SERIAL NOT NULL ,
-	MAR_NOMBRE            VARCHAR(40) 
-);
-CREATE UNIQUE INDEX XPKMARCA ON MARCA 
-(
-
-	MAR_ID
-);
-CREATE TABLE PERU_DEPARTMENTS
-(
-
-	id                    VARCHAR(2) NOT NULL ,
-	name                  VARCHAR(45) 
-);
-CREATE UNIQUE INDEX XPKPERU_DEPARTMENTS ON PERU_DEPARTMENTS 
-(
-
-	id
-);
-CREATE TABLE PERU_DISTRICTS
-(
-
-	id                    VARCHAR(6) NOT NULL ,
-	name                  VARCHAR(45) ,
-	province_id           VARCHAR(4) ,
-	department_id         VARCHAR(2) 
-);
-CREATE UNIQUE INDEX XPKPERU_DISTRICTS ON PERU_DISTRICTS 
-(
-
-	id
-);
-CREATE TABLE PERU_PROVINCES
-(
-
-	id                    VARCHAR(4) NOT NULL ,
-	name                  VARCHAR(45) ,
-	department_id         VARCHAR(2) 
-);
-CREATE UNIQUE INDEX XPKPERU_PROVINCES ON PERU_PROVINCES 
-(
-
-	id
-);
-CREATE TABLE PRODUCTO
-(
-
-	PRO_ID                SERIAL NOT NULL ,
-	PRO_NOMBRE            TEXT ,
-	PRO_PRECIO            FLOAT ,
-	PRO_STOCK             INT ,
-	MAR_ID                SERIAL ,
-	DEP_ID                SERIAL ,
-	PRO_CANTIDAD          INT ,
-	PRO_ESTADO            INT 
-);
-CREATE UNIQUE INDEX XPKPRODUCTO ON PRODUCTO 
-(
-
-	PRO_ID
-);
-CREATE TABLE TIPO_COMPROBANTE
-(
-
-	TI_ID                 SERIAL NOT NULL ,
-	TI_DESCRIPCION        VARCHAR(40) 
-);
-CREATE UNIQUE INDEX XPKTIPO_COMPROBANTE ON TIPO_COMPROBANTE 
-(
-
-	TI_ID
-);
-CREATE TABLE TIPO_PAGO
-(
-
-	PA_ID                 SERIAL NOT NULL ,
-	PA_DESCRIPCION        VARCHAR(40) ,
-	PA_ESTADO             INT 
-);
-CREATE UNIQUE INDEX XPKTIPO_PAGO ON TIPO_PAGO 
-(
-
-	PA_ID
-);
-CREATE TABLE USUARIO
-(
-
-	USU_DNI               VARCHAR(11) NOT NULL ,
-	USU_EMAIL             VARCHAR(40) ,
-	USU_PASSWORD          VARCHAR(60) ,
-	USU_ESTADO            CHAR(1) ,
-	USU_APELLIDOS         VARCHAR(40) ,
-	USU_NOMBRES           VARCHAR(40) ,
-	USU_TELEFONO          VARCHAR(40) ,
-	USU_CELULAR           VARCHAR(40) ,
-	USU_DIRECCION         VARCHAR(40) ,
-	USU_FECH_REG          DATE,
-	USU_TOKEN             VARCHAR(60) 
-);
-CREATE UNIQUE INDEX XPKUSUARIO ON USUARIO 
-(
-
-	USU_DNI
+CREATE TABLE USUARIO(
+	        USU_DNI               VARCHAR(11) NOT NULL ,
+		USU_APELLIDOS         VARCHAR(40) ,
+		USU_NOMBRES           VARCHAR(40) ,
+		USU_TELEFONO          VARCHAR(40) ,
+		USU_CELULAR           VARCHAR(40) ,
+		USU_DIRECCION         VARCHAR(40) ,
+		USU_EMAIL             VARCHAR(40) ,
+		USU_PASSWORD          VARCHAR(60) ,
+		USU_FECH_REG          DATE,
+		USU_ESTADO            CHAR(1), 
+       
+     PRIMARY KEY(USU_DNI)
 );
 
+CREATE TABLE TIPO_PAGO(
+        PA_ID                 SERIAL,
+        PA_DESCRIPCION        VARCHAR(40),
+        PA_ESTADO             INT,
+     PRIMARY KEY(PA_ID)
+);
 
+CREATE TABLE TIPO_COMPROBANTE(
+        TI_ID                 SERIAL,
+        TI_DESCRIPCION        VARCHAR(40),
+     PRIMARY KEY(TI_ID)
+);
+
+CREATE TABLE COMPRA(
+		COM_NUM               SERIAL NOT NULL ,
+        COM_FECHA             DATE ,
+		COM_TOTALNETO         FLOAT ,
+		COM_DESCUENTO         FLOAT ,
+		COM_TOTAL             FLOAT ,
+		USU_DNI               VARCHAR(11) ,
+		COM_COMERCIO          VARCHAR(40) ,
+		TI_ID                 INT ,
+		COM_ESTADO            VARCHAR(4) ,
+		COM_DOI               VARCHAR(11) ,
+		COM_TIPODOI           CHAR(3) ,
+		COM_ISDELIVERY        INT ,
+		COM_SERIE             VARCHAR(4) ,
+		COM_NCOM              VARCHAR(4) ,
+		COM_PERIODO           VARCHAR(6) ,
+		PA_ID                 INT,
+    PRIMARY KEY(COM_NUM),
+    FOREIGN KEY(USU_DNI) REFERENCES USUARIO(USU_DNI),
+    FOREIGN KEY(TI_ID) REFERENCES TIPO_COMPROBANTE(TI_ID),
+    FOREIGN KEY(PA_ID) REFERENCES TIPO_PAGO(PA_ID)
+);
+
+CREATE TABLE DEPARTAMENTO(
+        DEP_ID                SERIAL NOT NULL ,
+		DEP_NOMBRE            VARCHAR(40),
+        DEP_ESTADO            INT,
+    PRIMARY KEY(DEP_ID)
+);
+
+CREATE TABLE MARCA(
+        MAR_ID                SERIAL NOT NULL ,
+		MAR_NOMBRE            VARCHAR(40),
+        MAR_ESTADO            INT,
+    PRIMARY KEY(MAR_ID)
+);
+
+CREATE TABLE PRODUCTO(
+        PRO_ID                SERIAL NOT NULL ,
+		PRO_NOMBRE            TEXT ,
+		PRO_PRECIO            FLOAT ,
+		PRO_STOCK             INT ,
+		MAR_ID                INT ,
+		DEP_ID                INT ,
+		PRO_CANTIDAD          INT ,
+		PRO_ESTADO            INT,
+    PRIMARY KEY(PRO_ID),
+    FOREIGN KEY(MAR_ID) REFERENCES MARCA(MAR_ID),
+    FOREIGN KEY(DEP_ID) REFERENCES DEPARTAMENTO(DEP_ID)
+);
+
+CREATE TABLE DETALLE_COMPRA(
+		PRO_ID                INT NOT NULL ,
+		COM_NUM               INT NOT NULL ,
+        DCO_PUNITARIO         FLOAT ,
+		DCO_CANTIDAD          INT ,
+		DCO_SUBTOTAL          FLOAT ,
+    PRIMARY KEY(PRO_ID, COM_NUM),
+    FOREIGN KEY(PRO_ID) REFERENCES PRODUCTO(PRO_ID),
+    FOREIGN KEY(COM_NUM) REFERENCES COMPRA(COM_NUM)
+);
+
+CREATE TABLE UBIGEO_PERU_DEPARTMENTS(
+    id varchar(2),
+    name varchar(45),
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE UBIGEO_PERU_PROVINCES(
+    id varchar(4),
+    name varchar(45),
+    department_id varchar(2),
+    PRIMARY KEY(id),
+    FOREIGN KEY(department_id) references UBIGEO_PERU_DEPARTMENTS(id)
+);
+
+CREATE TABLE UBIGEO_PERU_DISTRICTS(
+    id varchar(6),
+    name varchar(45),
+    province_id varchar(4),
+    department_id varchar(2),
+    PRIMARY KEY(id),
+    FOREIGN KEY(province_id) references UBIGEO_PERU_PROVINCES(id),
+    FOREIGN KEY(department_id) references UBIGEO_PERU_DEPARTMENTS(id)
+);
+
+CREATE TABLE DELIVERY(
+		COM_NUM               SERIAL NOT NULL ,
+        DEL_PRECIO            FLOAT ,
+		DEL_FENTREGA          DATE ,
+		DEL_ESTADO            INT ,
+		department_id         VARCHAR(2) ,
+		province_id           VARCHAR(4) ,
+		district_id           VARCHAR(6) ,
+		DEL_CALLE             TEXT,
+    PRIMARY KEY(COM_NUM),
+    FOREIGN KEY(department_id) references UBIGEO_PERU_DEPARTMENTS(id),
+    FOREIGN KEY(province_id) references UBIGEO_PERU_PROVINCES(id),
+    FOREIGN KEY(district_id) references UBIGEO_PERU_DISTRICTS(id)
+);
