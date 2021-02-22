@@ -23,6 +23,13 @@ class ProductoController extends Controller
         return response()->json($producto);
 
     }
+    public function GetDescripcionProductoOnly($pro_nombre)
+    {
+       
+        $producto=DB::table('producto as p')->join('departamento as d','d.dep_id','=','p.dep_id')->join('marca as m','m.mar_id','=','p.mar_id')->where('p.pro_estado','=','1')->where('p.pro_nombre','like','%'.$pro_nombre.'%')->select('p.pro_id','p.pro_nombre','p.pro_precio','p.pro_stock','m.mar_id','m.mar_nombre as marca','d.dep_id','d.dep_nombre as departamento','p.pro_cantidad')->get();
+        return response()->json($producto);
+
+    }
     public function ListarProductos($id_dep){
         $producto=DB::table('producto as p')->where('dep_id', '=' , $id_dep)->where('p.pro_estado','=','1')->select('p.pro_id', 'p.pro_nombre', 'p.pro_precio', 'p.pro_stock', 'p.mar_id', 'p.dep_id' ,'p.pro_cantidad' , 'p.pro_estado')->get();
         return response()->json($producto);
