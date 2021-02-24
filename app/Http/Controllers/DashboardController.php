@@ -14,4 +14,8 @@ class DashboardController extends Controller
         return response()->json($TotalC);
     
     }
+    // public function RegistroSemana(){
+    //     $semana = DB::table('usuario as u')->whereDay('');
+    // }
+
 }
