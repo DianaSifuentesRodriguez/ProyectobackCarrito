@@ -67,6 +67,21 @@ class UsuarioController extends Controller
         return $usuario;
     }
 
+    /*public function passwordUpdate(Request $request, $id){
+        $usuario = Usuario::findOrFail($id);
+        //$usuario->usu_password = $request->password;
+        //$usuario->usu_password = '1234';
+        //$usuario->update();
+        $contra = $request;
+        return $contra;
+    }*/
+
+    public function passwordUpdate(Request $request, $id){
+        $usuario = Usuario::findOrFail($id);
+        $usuario->usu_password = $request->usu_password;
+        $usuario->update();
+        return $usuario;
+    }
     
     public function destroy($id)
     {
