@@ -13,7 +13,7 @@ class UsuarioController extends Controller
 
     public function index()
     {
-        $usuario = DB::table('usuario as u')->select('u.usu_dni', 'u.usu_apellidos', 'u.usu_nombres', 'u.usu_telefono', 'u.usu_celular', 'u.usu_direccion', 'u.usu_email', 'u.usu_password', 'u.usu_fech_reg', 'u.usu_estado')->get();
+        $usuario = DB::table('usuario as u')->select('u.usu_dni', 'u.usu_apellidos', 'u.usu_nombres', 'u.usu_telefono', 'u.usu_celular', 'u.usu_direccion', 'u.usu_email', 'u.usu_password', 'u.usu_rol','u.usu_fech_reg', 'u.usu_estado', 'u.department_id', 'u.province_id', 'u.district_id')->get();
         return response()->json($usuario);
     }
     public function UsuLogin($log, $pass)
@@ -49,8 +49,16 @@ class UsuarioController extends Controller
                 $usuario->usu_direccion = $request->usu_direccion;
                 $usuario->usu_email = $request->usu_email;
                 $usuario->usu_password = Hash::make($request->usu_password);
+                if($request->usu_rol == null || $request->usu_rol == ''){
+                    $usuario->usu_rol = 'cliente';
+                }else{
+                    $usuario->usu_rol = $request->usu_rol;
+                }
                 $usuario->usu_fech_reg = $request->usu_fech_reg;
                 $usuario->usu_estado = '1';
+                $usuario->department_id = $request->department_id;
+                $usuario->province_id = $request->province_id;
+                $usuario->district_id = $request->district_id;
                 $usuario->save();
             }
         } catch (Throwable $e) {
@@ -72,6 +80,9 @@ class UsuarioController extends Controller
         $usuario->usu_direccion = $request->usu_direccion;
         $usuario->usu_email = $request->usu_email;
         $usuario->usu_password = $request->usu_password;
+        $usuario->department_id = $request->department_id;
+        $usuario->province_id = $request->province_id;
+        $usuario->district_id = $request->district_id;
         $usuario->update();
         return $usuario;
     }

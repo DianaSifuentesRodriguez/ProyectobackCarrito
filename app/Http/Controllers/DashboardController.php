@@ -14,6 +14,14 @@ class DashboardController extends Controller
         return response()->json($TotalC);
     
     }
+
+    public function UsuariosConMasCompras(){
+        $Compras = DB::table('usuario as u')->join('compra as c','c.usu_dni','=','u.usu_dni')
+        ->where('u.usu_estado','=','1')->select('u.usu_dni','c.com_fecha');
+        return response()->json($Compras);
+    
+    }
+
     // public function RegistroSemana(){
     //     $semana = DB::table('usuario as u')->whereDay('');
     // }

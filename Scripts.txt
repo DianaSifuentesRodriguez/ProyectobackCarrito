@@ -1592,3 +1592,9 @@ INSERT INTO ubigeo_peru_districts (id, name, province_id, department_id) VALUES
 ('150405', 'Lachaqui', '1504', '15'),
 ('150406', 'San Buenaventura', '1504', '15'),
 ('150407', 'Santa Rosa de Quives', '1504', '15');
+
+
+insert into usuario (usu_dni,usu_apellidos,usu_nombres,usu_telefono,usu_celular,usu_direccion,usu_email,
+					 usu_password,usu_fech_reg,usu_estado) 
+					 values ('03256987','Castro Pinedo','Cecilia Maria','044 002325','986520014','Urb, los jardines',
+							'pinedo@gmail.com','123','2021-01-02',1)
