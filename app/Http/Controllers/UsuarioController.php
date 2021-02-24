@@ -87,7 +87,7 @@ class UsuarioController extends Controller
 
     public function passwordUpdate(Request $request, $id){
         $usuario = Usuario::findOrFail($id);
-        $usuario->usu_password = $request->usu_password;
+        $usuario->usu_password = Hash::make($request->usu_password);
         $usuario->update();
         return $usuario;
     }
