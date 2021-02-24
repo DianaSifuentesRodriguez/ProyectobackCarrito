@@ -41,4 +41,8 @@ Route::resource('indexmar', 'MarcaController');
 Route::resource('usuario', 'UsuarioController');
 Route::post('compras', 'CompraController@InsertarCompra');
 
+Route::put('passwordUpdate/{id}', 'UsuarioController@passwordUpdate');
+//Route::post('passwordUpdate/{id}', 'UsuarioController@passwordUpdate');
+
+
 
