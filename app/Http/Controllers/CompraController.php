@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Compra;
-use App\Producto;
 use App\DetalleCompra;
 use App\Delivery;
+use App\Producto;
 class CompraController extends Controller
 {
     public function InsertarCompra(Request $request){
@@ -35,10 +35,10 @@ class CompraController extends Controller
             $countBol = $bol->count();
             $compra->com_ncom = $countBol + 1;
         }
-        $compra->com_periodo = '2021-02';
+        $compra->com_periodo = $array[0]['com_periodo'];
         $compra->pa_id = $array[0]['pa_id'];
         $compra->save();
-        $last_ID = Compra::latest('com_num')->first();
+        $last_ID = $compra->com_num;
         $tamanio = sizeof($array);
         if($array[0]['com_isdelivery'] == 1){
             for($i = 1; $i<$tamanio-1; $i++) {
@@ -62,9 +62,9 @@ class CompraController extends Controller
             $delivery->del_precio = $array[$tamanio-1]['del_precio'];
             $delivery->del_fentrega = $array[$tamanio-1]['del_fentrega'];
             $delivery->del_estado = $array[$tamanio-1]['del_estado'];
-            $delivery->department_id = $array[$tamanio-1]['department_id'];
-            $delivery->province_id = $array[$tamanio-1]['province_id'];
-            $delivery->district_id = $array[$tamanio-1]['district_id'];
+            $delivery->department_id = $array[$tamanio-1]['del_department_id'];
+            $delivery->province_id = $array[$tamanio-1]['del_province_id'];
+            $delivery->district_id = $array[$tamanio-1]['del_district_id'];
             $delivery->del_calle = $array[$tamanio-1]['del_calle'];
             $delivery->save();
 
@@ -88,5 +88,12 @@ class CompraController extends Controller
             
         }
 
+    }
+
+
+    public function Prueba(Request $request){
+        $array = $request->json()->all();
+        $tamanio = sizeof($array);
+        return $tamanio;          
     }
 }
