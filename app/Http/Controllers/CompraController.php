@@ -7,6 +7,7 @@ use App\Compra;
 use App\DetalleCompra;
 use App\Delivery;
 use App\Producto;
+use Illuminate\Support\Facades\DB;
 class CompraController extends Controller
 {
     public function InsertarCompra(Request $request){
@@ -62,7 +63,7 @@ class CompraController extends Controller
             $delivery->del_precio = $array[$tamanio-1]['del_precio'];
             $delivery->del_fentrega = $array[$tamanio-1]['del_fentrega'];
             $delivery->del_estado = $array[$tamanio-1]['del_estado'];
-            $delivery->department_id = $array[$tamanio-1]['del_department_id'];
+            $delivery->department_id = $array[$tamanio-1]['del_deparment_id'];
             $delivery->province_id = $array[$tamanio-1]['del_province_id'];
             $delivery->district_id = $array[$tamanio-1]['del_district_id'];
             $delivery->del_calle = $array[$tamanio-1]['del_calle'];
@@ -88,6 +89,26 @@ class CompraController extends Controller
             
         }
 
+    }
+
+    public function HistorialCompra($id_usuario){
+        $Hcompra = DB::table('compra as c')->join('usuario as u', 'u.usu_dni', '=', 'c.usu_dni')->where('c.usu_dni', '=', $id_usuario)
+        ->select(DB::raw('CONCAT(c.com_serie, \'-\', c.com_ncom) as NroComprobante, c.com_tipodoi, c.com_doi, c.com_estado, c.com_fecha, 
+                        c.com_num, c.usu_dni'))
+        ->orderBy('c.com_fecha')->get();
+        return response()->json($Hcompra);
+    }
+
+    public function ComprasPorPeriodo(){
+        $Pcompra = DB::table('compra as c')->select(DB::raw('count(c.com_num) as NroCompras, c.com_periodo'))
+                    ->groupBy('c.com_periodo')->get();
+        return response()->json($Pcompra);
+    }
+    
+    public function CantidadCompras(){
+        $Ccompras = DB::table('compra as c')->select(DB::raw('count(c.com_num) as NroCompras'))
+                    ->get();
+        return response()->json($Ccompras);
     }
 
 

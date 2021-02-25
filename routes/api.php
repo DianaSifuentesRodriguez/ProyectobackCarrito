@@ -42,6 +42,9 @@ Route::resource('usuario', 'UsuarioController');
 Route::post('compras', 'CompraController@InsertarCompra');
 
 Route::put('passwordUpdate/{id}/{password}', 'UsuarioController@passwordUpdate');
+Route::get('historial/{id_usuario}', 'CompraController@HistorialCompra');
+Route::get('comprasxP', 'CompraController@ComprasPorPeriodo');
+Route::get('comprasxM', 'CompraController@CantidadCompras');
 //Route::post('passwordUpdate/{id}', 'UsuarioController@passwordUpdate');
 
 
