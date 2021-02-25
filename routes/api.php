@@ -45,6 +45,13 @@ Route::put('passwordUpdate/{id}/{password}', 'UsuarioController@passwordUpdate')
 Route::get('historial/{id_usuario}', 'CompraController@HistorialCompra');
 Route::get('comprasxP', 'CompraController@ComprasPorPeriodo');
 Route::get('comprasxM', 'CompraController@CantidadCompras');
+Route::get('comprasxP', 'CompraController@ComprasPorPeriodo');
+Route::get('comprasxM', 'CompraController@CantidadCompras');
+Route::get('listar_det/{id_compra}', 'CompraController@ListarDetalleCompra');
+Route::get('listarTOP', 'ProductoController@ListarProductosTOP');
+Route::get('TOPUsuarios', 'CompraController@ListarUsuariosTOP');
+Route::get('usuariosCant', 'UsuarioController@CantidadUsuarios');
+Route::get('historial/{id_usuario}', 'CompraController@HistorialCompra');
 //Route::post('passwordUpdate/{id}', 'UsuarioController@passwordUpdate');
 
 

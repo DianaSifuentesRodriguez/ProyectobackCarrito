@@ -66,7 +66,11 @@ class UsuarioController extends Controller
         }
     }
 
-
+    public function CantidadUsuarios(){
+        $CountUsu = DB::table('usuario as u')->select(DB::raw('count(u.usu_dni) as CantidadUsuarios'))->get();
+        return response()->json($CountUsu);
+    }
+    
     public function show($id)
     {
         return Usuario::findOrFail($id);

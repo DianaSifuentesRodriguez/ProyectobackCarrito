@@ -111,6 +111,23 @@ class CompraController extends Controller
         return response()->json($Ccompras);
     }
 
+    public function ListarDetalleCompra($id_compra){
+        $detalle = DB::table('detalle_compra as dc')->join('compra as c', 'c.com_num', '=', 'dc.com_num')->join('producto as p', 'p.pro_id', '=', 'dc.pro_id')
+        ->where('dc.com_num', '=', $id_compra)->select('dc.com_num','dc.pro_id', 'p.pro_nombre','dc.dco_punitario', 'dc.dco_cantidad', 'dc.dco_subtotal')
+        ->get();
+        return response()->json($detalle);
+    }
+
+    
+    public function ListarUsuariosTOP(){
+        $TOPusuarios = DB::table('usuario as u')->join('compra as c', 'c.usu_dni', '=', 'u.usu_dni')
+        ->select(DB::raw('count(c.com_num) as ComprasRealizadas, c.usu_dni, CONCAT(u.usu_apellidos, \' \',u.usu_nombres) as NombreUsuario'))->groupBy('c.usu_dni')
+        ->groupByRaw('CONCAT(u.usu_apellidos, \' \',u.usu_nombres)')->orderByRaw('count(c.com_num) DESC')->get();
+        return response()->json($TOPusuarios);
+    }
+    //Usuarios ------
+    
+    //---------------
 
     public function Prueba(Request $request){
         $array = $request->json()->all();

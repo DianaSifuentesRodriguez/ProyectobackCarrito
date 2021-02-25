@@ -35,6 +35,12 @@ class ProductoController extends Controller
         return response()->json($producto);
 
     }
+    public function ListarProductosTOP(){
+        $TOPproductos = DB::table('producto as p')->join('detalle_compra as dc', 'dc.pro_id', '=', 'p.pro_id')
+            ->select(DB::raw('sum(dc.dco_cantidad) as CantidadComprada, p.pro_nombre'))->groupBy('p.pro_nombre')
+            ->orderByRaw('sum(dc.dco_cantidad) DESC')->get();
+        return response()->json($TOPproductos);
+    }
     public function store(Request $request)
     {
         try{
