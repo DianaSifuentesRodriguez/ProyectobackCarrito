@@ -75,11 +75,11 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         $usuario = Usuario::findOrFail($id);
-        $usuario->usu_telefono = $request->usu_telefono;
-        $usuario->usu_celular = $request->usu_celular;
+        $usuario->usu_dni = $request->usu_dni;
+        $usuario->usu_apellidos = $request->usu_apellidos;
+        $usuario->usu_nombres = $request->usu_nombres;
         $usuario->usu_direccion = $request->usu_direccion;
         $usuario->usu_email = $request->usu_email;
-        $usuario->usu_password = $request->usu_password;
         $usuario->department_id = $request->department_id;
         $usuario->province_id = $request->province_id;
         $usuario->district_id = $request->district_id;
@@ -87,20 +87,15 @@ class UsuarioController extends Controller
         return $usuario;
     }
 
-    /*public function passwordUpdate(Request $request, $id){
+    public function passwordUpdate(Request $request, $id, $password){
         $usuario = Usuario::findOrFail($id);
-        //$usuario->usu_password = $request->password;
-        //$usuario->usu_password = '1234';
-        //$usuario->update();
-        $contra = $request;
-        return $contra;
-    }*/
-
-    public function passwordUpdate(Request $request, $id){
-        $usuario = Usuario::findOrFail($id);
-        $usuario->usu_password = Hash::make($request->usu_password);
-        $usuario->update();
-        return $usuario;
+        if (password_verify($password, $usuario->usu_password)) {
+            $usuario->usu_password = Hash::make($request->usu_password);
+            $usuario->update();
+            return $usuario;
+        } else {
+            return 50;
+        }
     }
     
     public function destroy($id)
