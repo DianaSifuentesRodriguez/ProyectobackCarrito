@@ -94,7 +94,7 @@ class CompraController extends Controller
     public function HistorialCompra($id_usuario){
         $Hcompra = DB::table('compra as c')->join('usuario as u', 'u.usu_dni', '=', 'c.usu_dni')->where('c.usu_dni', '=', $id_usuario)
         ->select(DB::raw('CONCAT(c.com_serie, \'-\', c.com_ncom) as NroComprobante, c.com_tipodoi, c.com_doi, c.com_estado, c.com_fecha, 
-                        c.com_num, c.usu_dni'))
+                        c.com_num, c.usu_dni, c.com_total'))
         ->orderBy('c.com_fecha')->get();
         return response()->json($Hcompra);
     }
